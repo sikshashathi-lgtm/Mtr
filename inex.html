@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>गृह ट्युसन पोखरा | Home Tuition Pokhara Gov Portal</title>
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gon-red: #DC143C;
+            --gon-blue: #002147;
+            --gon-gold: #DAA520;
+            --gon-bg: #F4F6F9;
+            --card-bg: #FFFFFF;
+            --text-main: #222222;
+            --border-color: #E0E0E0;
+        }
+
+        /* Dark Mode Theme Variables */
+        body.dark-mode {
+            --gon-bg: #121212;
+            --card-bg: #1E1E1E;
+            --text-main: #E0E0E0;
+            --border-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--gon-bg); color: var(--text-main); line-height: 1.5; transition: 0.3s; }
+        
+        /* Top Gov Utility Bar */
+        .top-gov-bar {
+            background-color: var(--gon-blue);
+            color: #fff;
+            padding: 6px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            border-bottom: 2px solid var(--gon-gold);
+        }
+        .top-tools { display: flex; gap: 15px; align-items: center; }
+        .top-tools button, .top-tools select {
+            background: rgba(255,255,255,0.2);
+            color: white; border: none; padding: 3px 8px; border-radius: 3px; cursor: pointer; font-size: 0.8rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            padding: 12px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-bottom: 4px solid var(--gon-red);
+        }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand img { height: 60px; }
+        .brand-text h1 { color: var(--gon-red); font-size: 1.4rem; font-weight: 700; }
+        .brand-text p { color: var(--gon-blue); font-size: 0.85rem; font-weight: 600; }
+
+        /* Navigation */
+        nav { background-color: var(--gon-red); padding: 0 5%; position: sticky; top: 0; z-index: 999; }
+        nav ul { display: flex; list-style: none; overflow-x: auto; }
+        nav ul li a { color: #fff; text-decoration: none; padding: 12px 15px; display: block; font-weight: 600; white-space: nowrap; font-size: 0.9rem; }
+        nav ul li a:hover { background-color: var(--gon-blue); color: var(--gon-gold); }
+
+        /* Notice Ticker */
+        .notice-bar { background-color: var(--gon-gold); color: #000; display: flex; align-items: center; padding: 6px 5%; font-weight: bold; font-size: 0.85rem; }
+        .notice-title { background-color: var(--gon-blue); color: #fff; padding: 2px 8px; border-radius: 3px; margin-right: 10px; white-space: nowrap; }
+
+        /* Layout Grid */
+        .container { padding: 30px 5%; display: grid; grid-template-columns: 2.7fr 1fr; gap: 25px; }
+        .card { background: var(--card-bg); padding: 20px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 25px; border-top: 3px solid var(--gon-blue); }
+        .section-title { color: var(--gon-blue); border-bottom: 2px solid var(--gon-red); padding-bottom: 6px; margin-bottom: 15px; font-size: 1.2rem; display: flex; justify-content: space-between; align-items: center; }
+        body.dark-mode .section-title { color: var(--gon-gold); }
+
+        /* Form Controls */
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 4px; font-weight: 600; font-size: 0.88rem; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--card-bg); color: var(--text-main); font-size: 0.9rem;
+        }
+        .btn { padding: 8px 16px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.2s; text-decoration: none; display: inline-block; font-size: 0.9rem; }
+        .btn-primary { background: var(--gon-red); color: white; }
+        .btn-secondary { background: var(--gon-blue); color: white; }
+        .btn-gold { background: var(--gon-gold); color: var(--gon-blue); }
+        .btn:hover { opacity: 0.9; }
+
+        /* Feature-specific styles */
+        .tutor-card { border: 1px solid var(--border-color); padding: 12px; border-radius: 6px; display: flex; gap: 12px; margin-bottom: 10px; background: var(--gon-bg); }
+        .tutor-avatar { width: 60px; height: 60px; border-radius: 50%; background: #ccc; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #555; }
+        .badge-verified { background: #28a745; color: white; padding: 2px 6px; border-radius: 10px; font-size: 0.7rem; }
+        
+        .job-item { border-left: 4px solid var(--gon-gold); padding: 10px; background: var(--gon-bg); margin-bottom: 8px; font-size: 0.85rem; }
+        .fee-result { font-size: 1.2rem; font-weight: bold; color: var(--gon-red); margin-top: 10px; text-align: center; }
+        
+        /* Floating Elements */
+        .floating-bot { position: fixed; bottom: 80px; right: 20px; background: var(--gon-blue); color: white; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
+        .floating-wa { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 10px 18px; border-radius: 25px; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; font-size: 0.9rem; }
+        
+        /* Chat Modal Mini */
+        .chat-window { display: none; position: fixed; bottom: 140px; right: 20px; width: 280px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1001; }
+        .chat-header { background: var(--gon-blue); color: white; padding: 10px; border-top-left-radius: 8px; border-top-right-radius: 8px; display: flex; justify-content: space-between; font-size: 0.9rem; }
+
+        @media (max-width: 850px) { .container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <!-- Top Utility Bar (Feature 26, 28) -->
+    <div class="top-gov-bar">
+        <span><i class="fa-solid fa-location-dot"></i> पोखरा महानगरपालिका, कास्की | <i class="fa-solid fa-shield-halved"></i> Govt Reg. #3490/PKS</span>
+        <div class="top-tools">
+            <button onclick="toggleDarkMode()"><i class="fa-solid fa-moon"></i> Theme</button>
+            <select onchange="changeLang(this.value)">
+                <option value="ne">नेपाली</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Main Header (Feature 30) -->
+    <header>
+        <div class="brand">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Emblem_of_Nepal.svg" alt="Nepal Emblem">
+            <div class="brand-text">
+                <h1 data-key="title">गृह ट्युसन पोखरा पोर्टल</h1>
+                <p data-key="sub">Home Tuition Pokhara Educational Network</p>
+            </div>
+        </div>
+        <div style="text-align: right; display: class-hide-mobile;">
+            <span style="font-size:0.8rem; font-weight:bold; color:var(--gon-red);"><i class="fa-solid fa-phone-volume"></i> SOS Emergency: 9800000000</span>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#"><i class="fa-solid fa-house"></i> गृहपृष्ठ</a></li>
+            <li><a href="#tutors">ट्युटर खोज्नुहोस्</a></li>
+            <li><a href="#calculator">शुल्क क्याल्कुलेटर</a></li>
+            <li><a href="#jobs">ट्युसन भ्याकेन्सी</a></li>
+            <li><a href="#demo">ट्रायल बुक</a></li>
+            <li><a href="#verify">ट्युटर आईडी जाँच</a></li>
+            <li><a href="#payment">अनलाइन भुक्तानी</a></li>
+        </ul>
+    </nav>
+
+    <!-- Notice Ticker -->
+    <div class="notice-bar">
+        <span class="notice-title"><i class="fa-solid fa-bell"></i> सूचना:</span>
+        <marquee onmouseover="this.stop();" onmouseout="this.start();">
+            पोखराका लेकसाइड, बिरौटा, बगर, र न्यु रोडमा कक्षा १-१२ र SEE तयारीका लागि नयाँ अनुभवी होम ट्युटरहरू उपलब्ध छन् !
+        </marquee>
+    </div>
+
+    <!-- Main Grid Layout -->
+    <div class="container">
+        <!-- Main Panel (Left) -->
+        <main>
+            
+            <!-- Feature 3: Tutor Search & Filter System -->
+            <div class="card" id="tutors">
+                <div class="section-title">
+                    <span><i class="fa-solid fa-magnifying-glass"></i> प्रमाणित ट्युटर खोज्नुहोस् (Filter Tutors)</span>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <select id="filterWard" onchange="filterTutors()">
+                            <option value="">सबै वडा/क्षेत्र (Pokhara)</option>
+                            <option value="Lakeside">लेकसाइड (वडा ६)</option>
+                            <option value="Newroad">न्यूरोड (वडा ८/९)</option>
+                            <option value="Baghar">बगर (वडा १/१६)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="filterSubject" onchange="filterTutors()">
+                            <option value="">सबै विषय (Subject)</option>
+                            <option value="Math">Math</option>
+                            <option value="Science">Science</option>
+                            <option value="English">English</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Feature 1, 4, 5: Profile, Verification & Rating -->
+                <div id="tutorList">
+                    <div class="tutor-card" data-ward="Lakeside" data-subject="Math">
+                        <div class="tutor-avatar"><i class="fa-solid fa-user-tie"></i></div>
+                        <div>
+                            <h4>राम शर्मा <span class="badge-verified"><i class="fa-solid fa-circle-check"></i> Verified ID</span></h4>
+                            <p style="font-size:0.8rem;">M.Sc Mathematics | ८ वर्ष अनुभव | लेकसाइड</p>
+                            <p style="color:var(--gon-gold); font-size:0.85rem;"><i class="fa-solid fa-star"></i> 4.9/5.0 (24 Ratings)</p>
+                            <button class="btn btn-secondary" style="font-size:0.75rem; padding:3px 8px; margin-top:5px;" onclick="alert('सम्पर्क विवरण पठाइयो!')">ट्युटर अनुरोध गर्नुहोस्</button>
+                        </div>
+                    </div>
+                    <div class="tutor-card" data-ward="Newroad" data-subject="Science">
+                        <div class="tutor-avatar"><i class="fa-solid fa-user-doctor"></i></div>
+                        <div>
+                            <h4>सिता श्रेष्ठ <span class="badge-verified"><i class="fa-solid fa-circle-check"></i> Verified ID</span></h4>
+                            <p style="font-size:0.8rem;">B.Sc Physics | ४ वर्ष अनुभव | न्यूरोड</p>
+                            <p style="color:var(--gon-gold); font-size:0.85rem;"><i class="fa-solid fa-star"></i> 4.8/5.0 (18 Ratings)</p>
+                            <button class="btn btn-secondary" style="font-size:0.75rem; padding:3px 8px; margin-top:5px;" onclick="alert('सम्पर्क विवरण पठाइयो!')">ट्युटर अनुरोध गर्नुहोस्</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 13: Interactive Fee Calculator -->
+            <div class="card" id="calculator">
+                <div class="section-title"><span><i class="fa-solid fa-calculator"></i> शुल्क क्याल्कुलेटर (Estimated Fee)</span></div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>कक्षा (Grade):</label>
+                        <select id="calcGrade" onchange="calculateFee()">
+                            <option value="4000">कक्षा १ - ५ (Primary)</option>
+                            <option value="6000">कक्षा ६ - ८ (Basic)</option>
+                            <option value="8000">कक्षा ९ - १० (SEE)</option>
+                            <option value="12000">कक्षा ११ - १२ (+2)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>दिन/हप्ता (Days per week):</label>
+                        <select id="calcDays" onchange="calculateFee()">
+                            <option value="1">हप्ताको ६ दिन</option>
+                            <option value="0.8">हप्ताको ३ दिन (Alternate)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="fee-result" id="feeOutput">अनुमानित मासिक शुल्क: रु. ४,०००</div>
+            </div>
+
+            <!-- Feature 6: Free Demo Class Booking -->
+            <div class="card" id="demo">
+                <div class="section-title"><span><i class="fa-solid fa-calendar-check"></i> २ दिनको नि:शुल्क ट्रायल क्लास बुक गर्नुहोस्</span></div>
+                <form onsubmit="event.preventDefault(); alert('Trial Booking Successful! ट्युटरले सम्पर्क गर्नुहुनेछ।');">
+                    <div class="form-grid">
+                        <div class="form-group"><input type="text" placeholder="विद्यार्थीको नाम" required></div>
+                        <div class="form-group"><input type="tel" placeholder="फोन नम्बर" required></div>
+                        <div class="form-group"><input type="text" placeholder="पोखराको ठेगाना" required></div>
+                    </div>
+                    <button class="btn btn-gold" style="width:100%;">Demo Class सुरक्षित गर्नुहोस्</button>
+                </form>
+            </div>
+
+            <!-- Feature 21: Live Tuition Job Board for Tutors -->
+            <div class="card" id="jobs">
+                <div class="section-title"><span><i class="fa-solid fa-briefcase"></i> हाल खुलेका ट्युसन भ्याकेन्सीहरू (Live Jobs)</span></div>
+                <div class="job-item">
+                    <strong>[SEE Math & Science]</strong> - बिरौटा-१७ | समय: बिहान ६:३० | रु. ८,५००/महिना 
+                    <button class="btn btn-primary" style="float:right; font-size:0.7rem;" onclick="alert('Job applied!')">Apply Instant</button>
+                </div>
+                <div class="job-item">
+                    <strong>[Class 4 All Subjects]</strong> - पार्दी | समय: बेलुका ४:०० | रु. ५,०००/महिना 
+                    <button class="btn btn-primary" style="float:right; font-size:0.7rem;" onclick="alert('Job applied!')">Apply Instant</button>
+                </div>
+            </div>
+
+            <!-- Feature 11, 12: Digital Payment & Receipt System -->
+            <div class="card" id="payment">
+                <div class="section-title"><span><i class="fa-solid fa-credit-card"></i> अनलाइन शुल्क भुक्तानी (eSewa / Khalti / Fonepay)</span></div>
+                <p style="font-size:0.85rem; margin-bottom:10px;">स्क्यान गरी भुक्तानी गर्नुहोस् र बिल प्राप्त गर्नुहोस्:</p>
+                <div style="display:flex; gap:15px; align-items:center;">
+                    <div style="background:#eee; width:100px; height:100px; display:flex; align-items:center; justify-content:center; border:1px solid #ccc;">QR Code</div>
+                    <div>
+                        <p style="font-size:0.85rem;"><strong>eSewa ID:</strong> 9800000000</p>
+                        <p style="font-size:0.85rem;"><strong>Account Holder:</strong> Home Tuition Pokhara</p>
+                        <button class="btn btn-secondary" style="margin-top:5px;" onclick="generateInvoice()">PDF Invoice जेनेरेट गर्नुहोस्</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar Panel (Right) -->
+        <aside>
+            <!-- Feature 4: ID Verification Portal -->
+            <div class="card" id="verify">
+                <div class="section-title"><span><i class="fa-solid fa-id-card"></i> शिक्षक ID जाँच</span></div>
+                <p style="font-size:0.8rem; margin-bottom:8px;">ट्युटरको आधिकारिकता जाँच्न ID Code हाल्नुहोस्:</p>
+                <input type="text" id="tutorIdInput" placeholder="उदा: HTP-102" style="width:100%; padding:6px; margin-bottom:8px;">
+                <button class="btn btn-primary" style="width:100%; font-size:0.8rem;" onclick="verifyTutor()">जाँच गर्नुहोस् (Verify)</button>
+            </div>
+
+            <!-- Feature 8: Student Progress Tracker Mini -->
+            <div class="card">
+                <div class="section-title"><span><i class="fa-solid fa-chart-line"></i> प्रगति प्रतिवेदन (Portal)</span></div>
+                <p style="font-size:0.8rem;">विद्यार्थी कोड हालेर महिनाको रिपोर्ट हेर्नुहोस्:</p>
+                <input type="text" placeholder="Student ID" style="width:100%; padding:6px; margin-bottom:8px; margin-top:5px;">
+                <button class="btn btn-secondary" style="width:100%; font-size:0.8rem;" onclick="alert('मासिक प्रगति: ९२% उपस्थिति, टेस्ट स्कोर: A+')">Report हेर्नुहोस्</button>
+            </div>
+
+            <!-- Feature 25: Referral & Earn -->
+            <div class="card" style="background: linear-gradient(135deg, #DAA520, #DC143C); color:white;">
+                <h4><i class="fa-solid fa-gift"></i> सिफारिस गर्नुहोस् र कमाउनुहोस्!</h4>
+                <p style="font-size:0.8rem; margin-top:5px;">साथीलाई ट्युटर सिफारिस गर्दा ५% नगद क्यासब्याक वा छुट प्राप्त गर्नुहोस्।</p>
+            </div>
+
+            <!-- Feature 17: SOS Emergency Button -->
+            <div class="card" style="border-top-color:red; text-align:center;">
+                <button class="btn btn-primary" style="width:100%; background:red;" onclick="alert('सुरक्षा टोलीलाई अलर्ट पठाइयो!')">
+                    <i class="fa-solid fa-triangle-exclamation"></i> SOS Emergency Helpline
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Feature 19: AI Chatbot Floating Trigger -->
+    <div class="floating-bot" onclick="toggleChat()"><i class="fa-solid fa-robot"></i></div>
+
+    <!-- Feature 19: AI Chatbot Window UI -->
+    <div class="chat-window" id="chatBox">
+        <div class="chat-header">
+            <span><i class="fa-solid fa-robot"></i> Tuity AI Assistant</span>
+            <span style="cursor:pointer" onclick="toggleChat()">✕</span>
+        </div>
+        <div style="padding:10px; height:150px; overflow-y:auto; font-size:0.8rem; background:var(--gon-bg);" id="chatLogs">
+            <p><strong>AI:</strong> नमस्ते! म गृह ट्युसन पोखराको एआई सहायक हुँ। म तपाईंलाई कसरी सहयोग गर्न सक्छु?</p>
+        </div>
+        <div style="padding:5px; display:flex;">
+            <input type="text" id="chatInput" placeholder="तपाईंको प्रश्न..." style="width:80%; padding:4px; font-size:0.8rem;">
+            <button onclick="sendChat()" style="width:20%; background:var(--gon-blue); color:white; border:none;">पठाउनुहोस्</button>
+        </div>
+    </div>
+
+    <!-- Feature 16: Floating WhatsApp Chat -->
+    <a href="https://wa.me/9779800000000" class="floating-wa" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp Chat
+    </a>
+
+    <!-- Footer -->
+    <footer style="background:var(--gon-blue); color:white; padding:20px 5%; margin-top:30px; border-top:4px solid var(--gon-gold); text-align:center; font-size:0.85rem;">
+        <p>&copy; २०२६ गृह ट्युसन पोखरा | नेपाल सरकारको ढाँचामा आधारित एकीकृत शैक्षिक पोर्टल</p>
+    </footer>
+
+    <!-- Comprehensive JavaScript Features Logic -->
+    <script>
+        // Feature 28: Dark Mode Switcher Logic
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // Feature 3: Live Tutor Filter Function
+        function filterTutors() {
+            let ward = document.getElementById('filterWard').value;
+            let subject = document.getElementById('filterSubject').value;
+            let cards = document.querySelectorAll('.tutor-card');
+
+            cards.forEach(card => {
+                let cardWard = card.getAttribute('data-ward');
+                let cardSubject = card.getAttribute('data-subject');
+                if ((ward === "" || cardWard === ward) && (subject === "" || cardSubject === subject)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Feature 13: Fee Calculator Function
+        function calculateFee() {
+            let base = parseInt(document.getElementById('calcGrade').value);
+            let multiplier = parseFloat(document.getElementById('calcDays').value);
+            let total = base * multiplier;
+            document.getElementById('feeOutput').innerText = "अनुमानित मासिक शुल्क: रु. " + total.toLocaleString();
+        }
+
+        // Feature 4: ID Verification Mock Function
+        function verifyTutor() {
+            let id = document.getElementById('tutorIdInput').value;
+            if (id === 'HTP-102' || id === 'HTP-101') {
+                alert('✓ सफलता! यो ID (गृह ट्युसन पोखरा) मा प्रमाणित र दर्ता भएको शिक्षक हो।');
+            } else {
+                alert('✕ माफ गर्नुहोस्! यो ID दर्ता भएको फेला परेन।');
+            }
+        }
+
+        // Feature 12: PDF Invoice Mock Generator
+        function generateInvoice() {
+            alert("डिजिटल भौचर/PDF रसिद जेनेरेट भयो। डाउनलोड हुँदैछ...");
+        }
+
+        // Feature 19: AI Chatbot Modal & Interactivity
+        function toggleChat() {
+            let box = document.getElementById('chatBox');
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function sendChat() {
+            let input = document.getElementById('chatInput');
+            let logs = document.getElementById('chatLogs');
+            if(input.value.trim() !== "") {
+                logs.innerHTML += `<p><strong>You:</strong> ${input.value}</p>`;
+                let query = input.value.toLowerCase();
+                input.value = "";
+                
+                setTimeout(() => {
+                    if(query.includes("fee") || query.includes("शुल्क")) {
+                        logs.innerHTML += `<p><strong>AI:</strong> शुल्क सामान्यतया रु. ४,००० देखि १५,००० सम्म कक्षा अनुसार फरक पर्छ।</p>`;
+                    } else {
+                        logs.innerHTML += `<p><strong>AI:</strong> धन्यवाद! थप जानकारीका लागि हाम्रो फोन ९८०००००००० मा सम्पर्क गर्नुहोस्।</p>`;
+                    }
+                    logs.scrollTop = logs.scrollHeight;
+                }, 500);
+            }
+        }
+
+        // Feature 26: Language Switcher Mock Logic
+        function changeLang(lang) {
+            if(lang === 'en') {
+                document.querySelector('[data-key="title"]').innerText = "Home Tuition Pokhara Portal";
+                document.querySelector('[data-key="sub"]').innerText = "Government Standardized Educational Network";
+            } else {
+                document.querySelector('[data-key="title"]').innerText = "गृह ट्युसन पोखरा पोर्टल";
+                document.querySelector('[data-key="sub"]').innerText = "Home Tuition Pokhara Educational Network";
+            }
+        }
+    </script>
+</body>
+</html>
